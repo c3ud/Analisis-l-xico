@@ -1,6 +1,7 @@
 import ply.lex as lex
 
-tokens = [ 'FOR','IF','NAME','NUMBER','PLUS','MINUS','TIMES','DIVIDE', 'EQUALS','LPAREN','RPAREN' ]
+tokens = ['FINSI','FINPARA','ENTONCES','FOR','IF','DO']+[ 'NAME','NUMBER','PLUS','MINUS','TIMES','DIVIDE', 'EQUALS','LPAREN','RPAREN','MAYOR','MENOR','MAYORIGUAL','MENORIGUAL','DIFERENTE' ]
+
 
 t_ignore = ' \t'
 t_PLUS = r'\+'
@@ -8,12 +9,32 @@ t_MINUS = r'-'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_EQUALS = r'\='
+t_MAYOR=r'>'
+t_MAYORIGUAL=r'>='
+t_MENOR=r'<'
+t_MENORIGUAL=r'<='
+t_DIFERENTE=r'!='
 t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
-t_FOR = r'PARA'
-t_IF= r'SI'
+
 t_LPAREN =r'\('
 t_RPAREN =r'\)'
 
+
+def t_FOR(t):
+    r'Para'
+    return t
+def t_DO(t):
+    r'Hacer'
+    return t
+def t_IF(t):
+    r'Si'
+    return t
+def t_ENTONCES(t):
+    r'Entonces'
+    return t
+def t_FINSI(t):
+    r'FinSi'
+    return t
 def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
@@ -27,7 +48,7 @@ def t_error(t):
 
 lex.lex() # Build the lexer
 
-lex.input("x = 3 - 4 + 5 * 6 () para")
+lex.input("x = 3 - 4 + 5 * 6 () Para Si > <= != Entonces entonces")
 while True:
     tok = lex.token()
     if not tok: break
