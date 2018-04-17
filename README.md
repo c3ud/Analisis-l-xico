@@ -1,5 +1,5 @@
 # Analisis-l-xico
-##Integrantes
+## Integrantes
 
 **Dwan Veloza**
 
